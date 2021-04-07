@@ -39,7 +39,7 @@
                       </button>
                       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
-                          <a class="nav-link bg-white rounded" href="#">Cart {{ cart }}</a>
+                          <a class="nav-link bg-white rounded" href="#">Cart {{ cart.length }}</a>
                         </div>
                       </div>
                     </div>
@@ -47,7 +47,7 @@
 
 
 
-                  <product-display :premium="premium"></product-display>
+                  <product-display :premium="premium" @add-to-cart="updateCart"></product-display>
 
 
                   
