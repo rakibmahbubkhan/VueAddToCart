@@ -1,4 +1,10 @@
 app.component('product-display', {
+    props:{
+        premium:{
+            type: Boolean,
+            required: true
+        }
+    },
     template: 
     /*html*/
     `<section class="py-5">
@@ -12,7 +18,7 @@ app.component('product-display', {
 
             <div class="col-sm-4">
                 <div class="product-display rounded border shadow">
-                        <div class="product-image">
+                        <div class="product-image" align="center">
                             <a><img width="300" :src="image" :class="{ outOfStockImg: !inStock }"></a>
                             <!-- 
                             <a v-if="!inStock" :href="image"><img width="300" :src="outOfStockImg"></a>
@@ -24,7 +30,7 @@ app.component('product-display', {
 
             <div class="col-sm-7">
                 <div class="product-description">
-                    <h1>{{ title }} <small><sup v-show="onSale">On sale</sup></small></h1>
+                    <h1>{{ title }} <sup class="onSale" v-show="onSale">On sale!</sup></h1>
                     <p>{{ Desc }}</p>
                     <p v-if="inStock > 10">In Stock</p>
                     <p v-else-if="inStock < 5 && inStock > 0">Almost Sold Out!</p>
@@ -33,6 +39,8 @@ app.component('product-display', {
                     <ul>
                         <li class="list-unstyled" v-for="detail in details">- {{ detail }}</li>
                     </ul>
+
+                    <p>Shipping: {{ shipping }}</p>
             
             
                     <div>
@@ -43,7 +51,6 @@ app.component('product-display', {
             
                     <div>
                         <!--<button :disabled="!inStock" v-on:click="deleteToCart()" :class="{ disableCourser: !inStock }">-</button>-->
-                        <strong>&nbsp; {{ cart }} &nbsp;</strong>
                         <button class="addToCartbtn text-white mt-2" :disabled="!inStock" v-on:click="addToCart()" :class="{ disableCourser: !inStock }">Add To Cart</button>
                     </div>
             
@@ -106,6 +113,12 @@ app.component('product-display', {
         },
         onSale(){
             return this.varients[this.selectedVarient].onSale
+        },
+        shipping(){
+            if(this.premium){
+                return 'Free'
+            }
+            return '$2.99'
         }
 
     }
