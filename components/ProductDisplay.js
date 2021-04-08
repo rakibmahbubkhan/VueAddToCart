@@ -75,17 +75,17 @@ app.component('product-display', {
             product: 'Tshirt',
             Desc: 'This is a beautiful T-shirt',
             url: './assets/images/one.jpg',
-            outOfStockImg: './assets/images/oot.jpg',
+            outOfStockImg: './assets/images/oot.jpg', //connect the Images from your Database
             details: ['50% cotton','30% polyster', '20% wool'],
             varients: [
-                        { id: 25, color:'yellow', image: './assets/images/one.jpg', onSale: true, quantity: 50, },
-                        { id: 26, color:'blue', image: './assets/images/two.jpg', onSale: false, quantity: 3 },
+                        { id: 25, color:'yellow', image: './assets/images/one.jpg', onSale: true, quantity: 50, }, 
+                        { id: 26, color:'blue', image: './assets/images/two.jpg', onSale: false, quantity: 3 }, //connect the Varients from your Database>
                         { id: 27, color:'ash', image: './assets/images/three.jpg', onSale: false, quantity: 0 },
                     ],
             sizes: [
                 {id:5, varient:'small'},
                 {id:6, varient:'large'},
-                {id:7, varient:'extra large'},
+                {id:7, varient:'extra large'},   //connect the Varients from your Database
                 {id:6, varient:'double extra large'},
             ],
             reviews:[]
