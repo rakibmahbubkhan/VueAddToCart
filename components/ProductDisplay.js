@@ -9,7 +9,7 @@ app.component('product-display', {
     /*html*/
     `<section class="py-5">
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row">
             <div class="col-sm-1">
                 <div>
                     <p class="color-circle" v-for="(varient, index) in varients" :key="varient.id" v-on:mouseover="updateVarient(index)" :style="{ backgroundColor: varient.color }"></p>
@@ -28,9 +28,9 @@ app.component('product-display', {
                 </div>
             </div>
 
-            <div class="col-sm-7">
+            <div class="col-sm-4">
                 <div class="product-description">
-                    <h1>{{ title }} <sup class="onSale" v-show="onSale">On sale!</sup></h1>
+                    <h4>{{ title }} <sup class="onSale" v-show="onSale">On sale!</sup></h4>
                     <p>{{ Desc }}</p>
                     <p v-if="inStock > 10">In Stock</p>
                     <p v-else-if="inStock < 5 && inStock > 0">Almost Sold Out!</p>
@@ -57,6 +57,13 @@ app.component('product-display', {
             
                 </div>
             </div>
+
+            <div class="col-sm-3">
+
+            <review-form @review-submitted="addReview"></review-form>
+            <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+            
+            </div>
         </div>
     </div>
 </section>`,
@@ -80,7 +87,8 @@ app.component('product-display', {
                 {id:6, varient:'large'},
                 {id:7, varient:'extra large'},
                 {id:6, varient:'double extra large'},
-            ]
+            ],
+            reviews:[]
         }
     },
 
@@ -95,6 +103,10 @@ app.component('product-display', {
 
         updateVarient(index) {
             this.selectedVarient = index
+        },
+
+        addReview(review){
+            this.reviews.push(review)
         }
     },
 
@@ -111,9 +123,11 @@ app.component('product-display', {
         inStock(){
             return this.varients[this.selectedVarient].quantity
         },
+
         onSale(){
             return this.varients[this.selectedVarient].onSale
         },
+
         shipping(){
             if(this.premium){
                 return 'Free'
